@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		body {
+			background-color: linen;
+			margin: 0;
+		}
+
+		#flex-container {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			flex-flow: space-evenly;
+			width: 100%;
+		}
+
+		#flex-container>.flex-item {
+			flex: auto;
+			margin: 10px;
+			padding: 10px;
+			text-align: center;
+			border: 10px ridge grey;
+		}
+
+		.flex-item>img {
+			width: 100px;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$.getJSON("https://restcountries.eu/rest/v2/all", function (data) {
+			var items = [];
+			$.each(data, function (key, val) {
+				items.push("<div class='flex-item' id='" + key + "'>");
+				items.push("<img src='" + val.flag + "''/>");
+				items.push("<br/>" + val.name);
+				items.push("<br/>(" + val.alpha3Code + ')');
+				items.push("</div>");
+				console.log(key, val);
+			});
+
+			$("<div/>", {
+				"id": "flex-container",
+				html: items.join("")
+			}).appendTo("body");
+		});
+	</script>
+</head>
+
+<body>
+</body>
+
+</html>
